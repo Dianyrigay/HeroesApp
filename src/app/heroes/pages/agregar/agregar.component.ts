@@ -9,8 +9,10 @@ import { HeroesService } from '../../services/heroes.service';
   templateUrl: './agregar.component.html',
   styles: [`
     img {
-      width: 100%;
+      width: 60%;
       border-radius: 10px;
+      margin: auto;
+      display: flex;
     }
   `]
 })
@@ -54,8 +56,7 @@ export class AgregarComponent implements OnInit {
       .subscribe( heroe => this.heroe = heroe)
   }
 
-  guardar() {
-
+  guardarHeroe() {
     if( this.heroe.superhero.trim().length === 0) {
       return;
     }
@@ -73,9 +74,13 @@ export class AgregarComponent implements OnInit {
         this.router.navigate(['/heroes/editar', heroe.id]);
       })
     }
+  }
 
-
-
+  borrarHeroe() {
+    this.heroesService.borrarHeroe(this.heroe.id!)
+    .subscribe( resp => {
+      this.router.navigate(['/heroes']);
+    })
   }
 
 }

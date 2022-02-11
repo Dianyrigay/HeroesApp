@@ -51,11 +51,22 @@
 
     <br>
 
-    <button mat-raised-button color="warn" (click)="guardar()">
-      <mat-icon>save</mat-icon>
-      Guardar
-    </button>
+    <div fxLayout>
+      <button *ngIf="heroe.id" mat-raised-button color="basic" (click)="borrarHeroe()">
+        <mat-icon>delete_outline</mat-icon>
+        Eliminar
+      </button>
+
+      <span class="spacer"></span>
+
+      <button mat-raised-button color="warn" (click)="guardarHeroe()">
+        <mat-icon>save</mat-icon>
+        Guardar
+      </button>
+    </div>
+
   </div>
+
 
   <div fxFlex="50" >
     <img [src]="heroe | imagen" alt="Nuevo Heroe">

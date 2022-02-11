@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from "rxjs";
 import { Heroe, Publisher } from '../../interfaces/heroes.interface';
+import { HeroesService } from '../../services/heroes.service';
 
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
-  styles: [
-  ]
+  styles: [`
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
+  `]
 })
 export class AgregarComponent implements OnInit {
 
@@ -29,16 +36,46 @@ export class AgregarComponent implements OnInit {
     alt_img: '',
   };
 
-  constructor() { }
+
+  constructor(private heroesService: HeroesService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
+
+    if (! this.router.url.includes('editar')) {
+      return;
+    }
+
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({ id }) => this.heroesService.getHeroePorId(id))
+      )
+      .subscribe( heroe => this.heroe = heroe)
   }
 
   guardar() {
 
     if( this.heroe.superhero.trim().length === 0) {
-      return
+      return;
     }
+
+    if(this.heroe.id) {
+      //actualizo heroe
+      this.heroesService.editarHeroe(this.heroe)
+      .subscribe(heroe => {
+        console.log('Actualizando Heroe:', heroe)
+      });
+    } else {
+      //guardar nuevo registro
+      this.heroesService.agregarHeroe(this.heroe)
+      .subscribe(heroe => {
+        this.router.navigate(['/heroes/editar', heroe.id]);
+      })
+    }
+
+
+
   }
 
 }

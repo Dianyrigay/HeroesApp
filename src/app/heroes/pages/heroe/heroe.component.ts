@@ -35,4 +35,6 @@ export class HeroeComponent implements OnInit {
       this.router.navigate(['/heroes/listado']);
     }
 
+
+
 }

@@ -1,27 +1,31 @@
-<p>error-page works!</p>
 
-<ul>
-  <li>
-    <a routerLink="/auth/login">
-      Ir a login
-    </a>
-  </li>
+<mat-sidenav-container fullscreen>
 
-  <li>
-    <a routerLink="/auth/register">
-      Ir a registro
-    </a>
-  </li>
+    <mat-toolbar>
+      <mat-toolbar-row class="buttonSidenav">
 
-  <li>
-    <a routerLink="/heroes/listado">
-      Ir a listado
-    </a>
-  </li>
+        <mat-icon color="warn">cyclone</mat-icon>
+        <span>HeroesApp</span>
+        <span class="spacer"></span>
 
-  <li>
-    <a routerLink="/heroes/buscar">
-      Ir a buscar heroes
-    </a>
-  </li>
-</ul>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+
+          <mat-button-toggle value="underline"><a routerLink="/auth/login">
+            Iniciar Sesión
+          </a></mat-button-toggle>
+
+          <mat-button-toggle value="underline"><a routerLink="/auth/register">
+            Registrarse
+          </a></mat-button-toggle>
+
+          <mat-button-toggle value="underline"><a routerLink="/heroes/listado">
+            Listado de Héroes
+          </a></mat-button-toggle>
+
+        </mat-button-toggle-group>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+</mat-sidenav-container>
+
+
